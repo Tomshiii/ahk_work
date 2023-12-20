@@ -18,16 +18,16 @@ startupTray()
 
 ;===========================================================================
 #HotIf WinActive(editors.Premiere.winTitle) and getKeyState("F24", "P")
-#Include <QMK\Prem>
+#Include <QMK\Work\Prem>
 ;===========================================================================
 #HotIf WinActive(editors.AE.winTitle) and getKeyState("F24", "P")
-#Include <QMK\AE>
+#Include <QMK\Work\AE>
 ;===========================================================================
 #HotIf getKeyState("F24", "P") and WinActive(editors.Photoshop.winTitle)
-#Include <QMK\Photoshop>
+#Include <QMK\Work\Photoshop>
 ;===========================================================================
 #HotIf getKeyState("F24", "P") ;these will work everywhere
-#Include <QMK\Always>
+#Include <QMK\Work\Always>
 ;===========================================================================
 
 
