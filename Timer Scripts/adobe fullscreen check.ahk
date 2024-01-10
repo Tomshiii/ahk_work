@@ -73,12 +73,12 @@ class adobeTimer extends count {
         )
             return
         coord.s()
-        setX := 1067, sety := 5, setWidth := 4055, setHeight := 1437
+        setX := 1065, sety := 0, setWidth := 4062, setHeight := 1447
         premWindow := obj.WinPos(nameObj.winTitle)
         __checkPos(premWindow) {
             if premWindow.x = setX && premWindow.y = sety && premWindow.width = setWidth && premWindow.height = setHeight
                 return true
-            try WinMove( setX := 1067, sety := 5, setWidth := 4055, setHeight := 1437, nameObj.winTitle)
+            try WinMove(setX, sety, setWidth, setHeight, nameObj.winTitle)
         }
 
         if __checkPos(premWindow) = true
