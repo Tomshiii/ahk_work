@@ -4,12 +4,14 @@ ListLines(0)
 KeyHistory(0)
 
 ; { \\ #Includes
+#Include <KSA\Keyboard Shortcut Adjustments>
 #Include <Classes\Settings>
 #Include <Classes\ptf>
 #Include <Classes\winget>
 #Include <Classes\timer>
 #Include <Classes\WM>
 #Include <Classes\Editors\Premiere>
+#Include <Classes\Editors\After Effects>
 #Include <Classes\errorLog>
 #Include <Classes\coord>
 #Include <Functions\trayShortcut>
@@ -48,6 +50,8 @@ class adobeTimer extends count {
         super.start()
     }
 
+    playToCurs := (InStr(ksa.playheadtoCursor, "{") && InStr(ksa.playheadtoCursor, "}")) ? LTrim(RTrim(ksa.playheadtoCursor, "}"), "{") : ksa.playheadtoCursor
+
     ;// default timer (attempts to be overridden by the user's settings value)
     fire := 2000
 
@@ -68,6 +72,7 @@ class adobeTimer extends count {
      * @param {String} progName the name of the program so a tooltip can accurately describe the program it was attempting to operate on
      */
     __fs(nameObj, progName) {
+        InstallMouseHook(1)
         if ((!IsObject(nameObj)             || !nameObj.HasProp("winTitle") ||
             !nameObj.HasProp("titleCheck")) || !nameObj.titleCheck
         )
@@ -78,6 +83,8 @@ class adobeTimer extends count {
         __checkPos(premWindow) {
             if premWindow.x = setX && premWindow.y = sety && premWindow.width = setWidth && premWindow.height = setHeight
                 return true
+        }
+        __doMove() {
             try WinMove(setX, sety, setWidth, setHeight, nameObj.winTitle)
         }
 
@@ -92,8 +99,10 @@ class adobeTimer extends count {
             }
             WM.Send_WM_COPYDATA("Premiere_RightClick," A_ScriptName, ptf.MainScriptName ".ahk")
             sleep 50
-            if prem.RClickIsActive = false
-                __checkPos(premWindow)
+            if prem.RClickIsActive = false && (GetKeyState("RButton", "P") = false) && (GetKeyState(this.playToCurs) = false) && (GetKeyState("XButton1", "P") = false) && (GetKeyState("XButton2", "P") = false) {
+                if !__checkPos(premWindow)
+                    __doMove()
+            }
             return
         }
         fireRound := Round(this.fire/1000, 1)
