@@ -81,6 +81,8 @@ class adobeTimer extends count {
         coord.s()
         setX := 1065, sety := 0, setWidth := 4062, setHeight := 1447
         premWindow := obj.WinPos(nameObj.winTitle)
+        if !IsSet(premWindow) || !IsObject(premWindow) || !premWindow
+            return
         __checkPos(premWindow) {
             if premWindow.x = setX && premWindow.y = sety && premWindow.width = setWidth && premWindow.height = setHeight
                 return true
