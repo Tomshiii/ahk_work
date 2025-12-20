@@ -3,8 +3,9 @@
 #Requires AutoHotkey v2.0
 
 ; { \\ #Includes
-#Include <Classes\ptf>
-#Include <Functions\trayShortcut>
+#Include '%A_Appdata%\tomshi\lib'
+#Include Classes\ptf.ahk
+#Include Functions\trayShortcut.ahk
 ;there are more includes down below
 ; }
 
@@ -18,16 +19,16 @@ startupTray()
 
 ;===========================================================================
 #HotIf WinActive(editors.Premiere.winTitle) and getKeyState("F24", "P")
-#Include <QMK\Work\Prem>
+#Include QMK\Work\Prem.ahk
 ;===========================================================================
 #HotIf WinActive(editors.AE.winTitle) and getKeyState("F24", "P")
-#Include <QMK\Work\AE>
+#Include QMK\Work\AE.ahk
 ;===========================================================================
 #HotIf getKeyState("F24", "P") and WinActive(editors.Photoshop.winTitle)
-#Include <QMK\Work\Photoshop>
+#Include QMK\Work\Photoshop.ahk
 ;===========================================================================
 #HotIf getKeyState("F24", "P") ;these will work everywhere
-#Include <QMK\Work\Always>
+#Include QMK\Work\Always.ahk
 ;===========================================================================
 
 

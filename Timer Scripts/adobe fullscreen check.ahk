@@ -4,17 +4,18 @@ ListLines(0)
 KeyHistory(0)
 
 ; { \\ #Includes
-#Include <KSA\Keyboard Shortcut Adjustments>
-#Include <Classes\Settings>
-#Include <Classes\ptf>
-#Include <Classes\winget>
-#Include <Classes\timer>
-#Include <Classes\WM>
-#Include <Classes\Editors\Premiere>
-#Include <Classes\Editors\After Effects>
-#Include <Classes\errorLog>
-#Include <Classes\coord>
-#Include <Functions\trayShortcut>
+#Include '%A_Appdata%\tomshi\lib'
+#Include KSA\Keyboard Shortcut Adjustments.ahk
+#Include Classes\Settings.ahk
+#Include Classes\ptf.ahk
+#Include Classes\winget.ahk
+#Include Classes\timer.ahk
+#Include Classes\WM.ahk
+#Include Classes\Editors\Premiere.ahk
+#Include Classes\Editors\After Effects.ahk
+#Include Classes\errorLog.ahk
+#Include Classes\coord.ahk
+#Include Functions\trayShortcut.ahk
 ; }
 
 SetWorkingDir(A_ScriptDir)
