@@ -41,10 +41,12 @@ class adobeTimer extends count {
     __New() {
         try {
             ;// open settings instance and start timer
-            UserSettings := UserPref()
+            UserSettings := CLSID_Objs.load("UserSettings")
+            ;// open settings instance and start timer
             fire_frequency := UserSettings.adobe_FS
             this.fire := (fire_frequency * 1000)
             this.mainScript := UserSettings.MainScriptName
+            this.premName := "Premiere" Editors.__determinePremName(false)
             UserSettings := ""
         }
 
@@ -53,6 +55,7 @@ class adobeTimer extends count {
     }
     mainScript := ""
     playToCurs := (InStr(ksa.playheadtoCursor, "{") && InStr(ksa.playheadtoCursor, "}")) ? LTrim(RTrim(ksa.playheadtoCursor, "}"), "{") : ksa.playheadtoCursor
+    premName := ""
 
     ;// default timer (attempts to be overridden by the user's settings value)
     fire := 2000
@@ -63,7 +66,7 @@ class adobeTimer extends count {
         if !WinActive(prem.winTitle) && !WinActive(AE.winTitle)
             return
         if WinActive(prem.winTitle)
-            this.__fs(WinGet.PremName(), "Premiere Pro")
+            this.__fs(WinGet.PremName(,,, false), this.premName)
         if WinActive(AE.winTitle)
             this.__fs(WinGet.AEName(), "After Effects")
     }
@@ -76,7 +79,7 @@ class adobeTimer extends count {
     __fs(nameObj, progName) {
         InstallMouseHook(1)
         if ((!IsObject(nameObj)             || !nameObj.HasProp("winTitle") ||
-            !nameObj.HasProp("titleCheck")) || !nameObj.titleCheck
+            !nameObj.HasProp("titleCheck")) || !(nameObj.titleCheck = true)
         )
             return
         coord.s()
