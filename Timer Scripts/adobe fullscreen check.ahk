@@ -102,7 +102,7 @@ class adobeTimer extends count {
             return
         if A_TimeIdleKeyboard > 1250 {
             ;// this script will attempt to NOT fire if RClickPrem is active
-            if !winExt.ExistRegex(this.mainScript ".ahk",,,, true) {
+            if !winExt.ExistRegex("Core Functionality.ahk",,,, true) {
                 __checkPos(premWindow)
                 return
             }
